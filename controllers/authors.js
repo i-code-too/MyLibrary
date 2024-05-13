@@ -24,7 +24,7 @@ router.get('/new', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const author = new Author({ name: req.body.name })
+    const author = new Author({name: req.body.name})
     
     // // non async-await code
     // author.save((err, newAuthor) => {
