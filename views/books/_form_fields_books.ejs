@@ -1,0 +1,33 @@
+<div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= book.title %>">
+</div>
+<div>
+<label>Name of the Author</label>
+    <select name="authorName">
+        <option label="Select an author"></option>
+        <% authors.forEach(author => { %>
+            <% if(author.id === book.author) { %>   <!-- book.author, not book.author.id, because in the book schema we are taking author object id as author, not author -->
+                <option selected label="<%= author.name %>" value="<%= author.id %>"></option>
+            <% } else { %>
+                <option label="<%= author.name %>" value="<%= author.id %>"></option>
+            <% } %>
+        <% }) %>
+    </select>
+</div>
+<div>
+    <label>Publish Date</label>
+    <input type="date" name="publishDate" value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">  <!-- splitting time and returning only date from ISO string-->
+</div>
+<div>
+    <label>Page Count</label>
+    <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
+</div>
+<div>
+    <label>Cover</label>
+    <input type="file" name="coverImage">
+</div>
+<div>
+    <label>Description (optional)</label>
+    <textarea name="description"><%= book.description %></textarea>
+</div>

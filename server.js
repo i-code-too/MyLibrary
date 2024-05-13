@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 
 const indexRouter = require('./controllers/index.js');
 const authorRouter = require('./controllers/authors.js');
+const bookRouter = require('./controllers/books.js');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -25,5 +26,6 @@ db.once('open', () => console.log('Connected to Mongoose.'));
 
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);                     // this /authors will be appended to the path
+app.use('/books', bookRouter);
 
 app.listen(process.env.PORT || 3000);

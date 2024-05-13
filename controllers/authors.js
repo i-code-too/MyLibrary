@@ -15,25 +15,17 @@ router.get('/', async (req, res) => {
     }                
 })
 
-router.get('/new', (req, res) => {
-    res.render('authors/new.ejs', {author: new Author()});
+router.get('/new', async (req, res) => {
+    try {
+        res.render('authors/new.ejs', {author: new Author()});  // creating new Author object to repopulate in case error occurs when user submits form
+    } catch {
+        res.redirect('/')
+    }  
 })
 
 router.post('/', async (req, res) => {
     const author = new Author({ name: req.body.name })
-    // async-await code
-    try {
-        const newAuthor = await author.save()
-        // res.redirect(`authors/${newAuthor.id}`);
-        res.redirect(`authors`);
-    } catch {
-        res.render('authors/new', 
-            {
-                author: author,
-                errorMessage: 'Error creating Author'
-            }
-        )
-    }
+    
     // // non async-await code
     // author.save((err, newAuthor) => {
     //     if(err){
@@ -49,6 +41,19 @@ router.post('/', async (req, res) => {
     //         res.redirect(`authors`)
     //     }
     // })
+
+    // async-await code
+    try {
+        const newAuthor = await author.save();
+        // res.redirect(`authors/${newAuthor.id}`);
+        res.redirect('authors');
+    } catch {
+        res.render('authors/new', {
+                author: author,
+                errorMessage: 'Error creating new author.'
+            }
+        )
+    }
 })
 
 module.exports = router;
