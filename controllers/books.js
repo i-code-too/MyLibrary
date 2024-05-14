@@ -16,7 +16,7 @@ const upload = multer({
 })
 
 router.get('/', async (req, res) => {
-    let query = Book.find()
+    let query = await Book.find()
     if(req.query.title != null && req.query.title != ''){
         query = query.regex('title', new RegExp(req.query.title, 'i'))
     }
@@ -39,7 +39,7 @@ router.get('/new', async (req, res) => {
 })
 
 router.post('/', upload.single('coverImage'), async (req, res) => {
-    const coverImageFileName = req.file != null ? req.file.filename : null
+    const coverImageFileName = (req.file != null) ? req.file.filename : null
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
@@ -48,13 +48,11 @@ router.post('/', upload.single('coverImage'), async (req, res) => {
         coverImageName: coverImageFileName,
         description: req.body.description
     })
-    // res.send(req.body)
 
     try {
         const newBook = await book.save()
         // res.redirect(`books/${newBook.id}`)
         res.redirect('books')
-        // console.log(req.body)
     } catch {
         if(book.coverImageName != null){
             removeBookCover(book.coverImageName)
