@@ -4,7 +4,7 @@
 </div>
 <div>
 <label>Name of the Author</label>
-    <select name="authorName">
+    <select name="author">
         <option label="Select an author"></option>
         <% authors.forEach(author => { %>
             <% if(author.id === book.author) { %>   <!-- book.author, not book.author.id, because in the book schema we are taking author object id as author, not author -->
@@ -17,7 +17,7 @@
 </div>
 <div>
     <label>Publish Date</label>
-    <input type="date" name="publishDate" value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">  <!-- splitting time and returning only date from ISO string-->
+    <input type="date" name="publishDate" value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">  <!-- splitting time and returning only date from ISO string; ISO String done because date is retreived from the database and is not in the right format to be displayed to the user -->
 </div>
 <div>
     <label>Page Count</label>
