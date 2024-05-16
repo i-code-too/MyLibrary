@@ -36,7 +36,7 @@ const bookSchema = new mongoose.Schema({
 })
 
 // virtual property derives it's value from real properties mentioned in schema above
-bookSchema.virtual('coverImagePath').get(function(){  // not using arrow function since 'this' property needs to refer to the actual book itself
+bookSchema.virtual('coverImagePath').get(function(){  // not using arrow function since we need 'this' property to refer to the actual book itself
     if(this.coverImageName != null){
         return path.join('/', coverImageBasePath, this.coverImageName) // root path will be /public
     }
