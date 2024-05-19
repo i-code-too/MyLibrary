@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Author = require('../models/author.js');
+const Book = require('../models/book.js');
 
 router.get('/', async (req, res) => {
     let searchOptions = {}
@@ -15,6 +16,7 @@ router.get('/', async (req, res) => {
     }                
 })
 
+// router.get('/new') should always be above router.get('/:id'), otherwise 'new' will taken as the id parameter in the path
 router.get('/new', async (req, res) => {
     try {
         res.render('authors/new.ejs', {author: new Author()});  // creating new Author object to repopulate in case error occurs when user submits form
@@ -53,6 +55,64 @@ router.post('/', async (req, res) => {
                 errorMessage: 'Error creating new author.'
             }
         )
+    }
+})
+
+router.get('/:id', async (req, res) => {          // signifies that after colon, we will be sending a variable called id in the path
+    try {
+        // // req.params contain all the parameters sent in url; since we have sent only id in url, only id will be present in params
+        // res.send('Show Author ' + req.params.id)       // using + will concatenate the string, whereas using , will send second argument as variable       
+        const author = await Author.findById(req.params.id);
+        const books = await Book.find({author: author.id}).limit(6).exec();
+        res.render('authors/show.ejs', {author: author, booksByAuthor: books});
+    } catch {
+        res.redirect('/');
+    }
+})
+
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const author = await Author.findById(req.params.id);
+        res.render('authors/edit.ejs', {author: author});    // check for error
+    } catch {
+        res.redirect('/authors');
+    }
+})
+
+router.put('/:id', async (req, res) => {         // put method cannot be used directly by server, therefore we use method-override
+    let author
+    try {
+        author = await Author.findById(req.params.id);
+        author.name = req.body.name;
+        await author.save();
+        res.redirect(`${author.id}`);
+    } catch {
+        if(author == null) {
+            res.redirect('/')
+        }
+        else {
+            res.render('authors/edit', {
+                    author: author,
+                    errorMessage: 'Error updating new author.'
+                }
+            )
+        }
+    }
+})
+
+router.delete('/:id', async (req, res) => {         // delete method cannot be used directly by server, therefore we use method-override
+    let author
+    try {
+        author = await Author.findById(req.params.id);
+        await author.remove();
+        res.redirect('/authors');
+    } catch {
+        if(author == null) {
+            res.redirect('/');
+        }
+        else {
+            res.redirect(`${author.id}`);
+        }
     }
 })
 

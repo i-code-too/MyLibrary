@@ -88,6 +88,7 @@ router.post('/', async (req, res) => {
         renderNewPage(res, book, true)
     }
 })
+
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 function saveCover(book, coverImageEncoded){
     if(coverImageEncoded == null) return;
