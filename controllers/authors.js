@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
         res.render('authors/all.ejs', {authors: authors, searchOptions: req.query})
     } catch {
         res.redirect('/')
-    }                
+    }
 })
 
 // router.get('/new') should always be above router.get('/:id'), otherwise 'new' will taken as the id parameter in the path
@@ -93,7 +93,7 @@ router.put('/:id', async (req, res) => {         // put method cannot be used di
         else {
             res.render('authors/edit', {
                     author: author,
-                    errorMessage: 'Error updating new author.'
+                    errorMessage: 'Error updating author.'
                 }
             )
         }
@@ -102,16 +102,23 @@ router.put('/:id', async (req, res) => {         // put method cannot be used di
 
 router.delete('/:id', async (req, res) => {         // delete method cannot be used directly by server, therefore we use method-override
     let author
+    let books
     try {
         author = await Author.findById(req.params.id);
-        await author.remove();
+        books = await Book.find({author: author.id}).limit(6).exec();
+        await author.deleteOne();
         res.redirect('/authors');
-    } catch {
+    } catch (err) {
+        console.log(err)
         if(author == null) {
             res.redirect('/');
         }
         else {
-            res.redirect(`${author.id}`);
+            res.render('authors/show', {
+                author: author,
+                booksByAuthor: books,
+                errorMessage: 'Error deleting author since the author still has books stored under their name.'
+            });
         }
     }
 })

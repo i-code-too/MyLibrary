@@ -9,19 +9,20 @@ const authorSchema = new mongoose.Schema({
     }
 )
 
-// function to not remove authors that have books linked to them on the website
-authorSchema.pre('remove', function(next){   // not using arrow function since we are using 'this' inside function
-    Book.find({author: this.id}, (err, books) => {
-        if (err) {   // happens when we had trouble finding a book with that author in database for some reason other than it not existing
-            next(err)
-        }
-        else if (books.length > 0) {
+// function to not delete authors that have books linked to them on the website
+authorSchema.pre('deleteOne', {document: true, query: false}, async function(next){   // not using arrow function since we are using 'this' inside function
+    try {
+        const books = await Book.find({ author: this.id });
+        if (books.length > 0) {
             next(new Error('This author still has books.'))
         }
         else {
             next()
         }
-    })
+    } 
+    catch (err) {    // happens when we had trouble finding a book with that author in database for some reason other than it not existing
+            next(err)
+    }
 })
 
 module.exports = mongoose.model('Author', authorSchema)
