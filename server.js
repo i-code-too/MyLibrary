@@ -17,7 +17,7 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts);
 app.use(methodOverride('_method'));              // _method will contain the name of the method(PUT/DELETE) with which we want to over the original method(GET/POST)
-app.set(express.static('public'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}));
 
 const mongoose = require('mongoose');
