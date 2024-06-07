@@ -1,0 +1,108 @@
+@import 'variables.css';
+
+:root {
+    --form-label-font-size: 1.2rem;
+    --form-input-background-color: var(--color-background-light);
+    --form-input-border-color-blue: var(--color-background-left);
+    --form-input-text-color-blue: var(--color-background-left);
+    --form-input-border-color-aqua: var(--color-background-middle);
+    --form-input-text-color-aqua: var(--color-background-middle);
+    --form-input-border-color-pink: var(--color-background-right);
+    --form-input-text-color-pink: var(--color-background-right);
+}
+
+.form-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.form-row-end {
+    justify-content: flex-end;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.form-item:first-child {
+    margin-left: 0;
+}
+
+.form-item-no-grow {
+    flex-grow: 0;
+}
+
+.form-item > label {
+    font-size: var(--form-label-font-size);
+    margin-bottom: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+.form-item input, .form-item select, .form-item textarea {
+    height: 2rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: normal;
+    font-family: 'Gotham Rounded';
+    outline: none;
+}
+
+.form-item select option {
+    background-color: var(--color-background-left);
+    color: var(--color-background-light);
+}
+
+.form-item textarea {
+    height: 100%;
+    resize: none;
+}
+
+.blue div input, .blue div select {
+    border: 2.5px solid var(--form-input-border-color-blue);
+    background-color: var(--form-input-background-color);
+    color: var(--form-input-text-color-blue);
+}
+
+.blue div label {
+    color: var(--form-input-text-color-blue);
+}
+
+.aqua div input{
+    border: 2.5px solid var(--form-input-border-color-aqua);
+    background-color: var(--form-input-background-color);
+    color: var(--form-input-text-color-aqua);
+}
+
+.aqua div label {
+    color: var(--form-input-text-color-aqua);
+}
+
+.pink div input, .pink div textarea {
+    border: 2.5px solid var(--form-input-border-color-pink);
+    background-color: var(--form-input-background-color);
+    color: var(--form-input-text-color-pink);
+}
+
+.pink div label {
+    color: var(--form-input-text-color-pink);
+}
+
+.filepond--root {
+    font-family: 'Gotham Rounded';
+    margin-bottom: 0;
+}
+
+.filepond--panel-root {
+    background-color: var(--form-input-background-color);
+    border: 2.5px solid var(--form-input-border-color-pink);
+}
+
+.filepond--drop-label {
+    color: var(--form-input-text-color-pink);
+    font-size: inherit;
+}

@@ -2,6 +2,7 @@
 @import 'shared/variables.css';
 @import 'shared/header.css';
 @import 'shared/buttons.css';
+@import 'shared/form.css';
 
 html, body {
     width: 100%;
@@ -57,4 +58,12 @@ body {
     font-size: 2rem;
     font-weight: 500;
     color: var(--color-background-right);
+}
+
+.page-header-aqua {
+    color: var(--color-background-middle);
+}
+
+.page-header-blue {
+    color: var(--color-background-left);
 }

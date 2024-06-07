@@ -1,33 +1,39 @@
-<div>
-    <label>Title</label>
-    <input type="text" name="title" value="<%= book.title %>">
+<div class="form-row blue">
+    <div class="form-item">
+        <label>Title</label>
+        <input type="text" name="title" value="<%= book.title %>">
+    </div>
+    <div class="form-item">
+        <label>Name of the Author</label>
+        <select name="author">
+            <option label="Select an author"></option>
+            <% authors.forEach(author => { %>
+                <% if(author.id === book.author) { %>   <!-- book.author, not book.author.id, because in the book schema we are taking author object id as author, not author -->
+                    <option selected label="<%= author.name %>" value="<%= author.id %>"></option>
+                <% } else { %>
+                    <option label="<%= author.name %>" value="<%= author.id %>"></option>
+                <% } %>
+            <% }) %>
+        </select>
+    </div>
 </div>
-<div>
-<label>Name of the Author</label>
-    <select name="author">
-        <option label="Select an author"></option>
-        <% authors.forEach(author => { %>
-            <% if(author.id === book.author) { %>   <!-- book.author, not book.author.id, because in the book schema we are taking author object id as author, not author -->
-                <option selected label="<%= author.name %>" value="<%= author.id %>"></option>
-            <% } else { %>
-                <option label="<%= author.name %>" value="<%= author.id %>"></option>
-            <% } %>
-        <% }) %>
-    </select>
+<div class="form-row aqua">
+    <div class="form-item">
+        <label>Publish Date</label>
+        <input type="date" name="publishDate" value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">  <!-- splitting time and returning only date from ISO string; ISO String done because date is retreived from the database and is not in the right format to be displayed to the user -->
+    </div>
+    <div class="form-item aqua">
+        <label>Page Count</label>
+        <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
+    </div>
 </div>
-<div>
-    <label>Publish Date</label>
-    <input type="date" name="publishDate" value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">  <!-- splitting time and returning only date from ISO string; ISO String done because date is retreived from the database and is not in the right format to be displayed to the user -->
-</div>
-<div>
-    <label>Page Count</label>
-    <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
-</div>
-<div>
-    <label>Cover</label>
-    <input type="file" name="coverImage" class="filepond">
-</div>
-<div>
-    <label>Description (optional)</label>
-    <textarea name="description"><%= book.description %></textarea>
+<div class="form-row pink">
+    <div class="form-item form-item-no-grow">
+        <label>Cover</label>
+        <input type="file" name="coverImage" class="filepond">
+    </div>
+    <div class="form-item">
+        <label>Description (optional)</label>
+        <textarea name="description"><%= book.description %></textarea>
+    </div>
 </div>
