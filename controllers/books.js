@@ -151,7 +151,7 @@ router.delete('/:id', async (req, res) => {
         if(book != null) {
             res.render('books/show', {
                 book: book,
-                errorMessage: 'Error deleting book.'
+                errorMessage: '!! Error deleting book !!'
             })
         }
         else {
@@ -166,10 +166,10 @@ async function renderFormPage(res, book, form, hasError = false){
         const params = {authors: authors, book: book}
         if (hasError){
             if(form == 'edit'){
-                params.errorMessage = 'Error updating book.'
+                params.errorMessage = '!! Error updating book !!'
             }
             else {
-                params.errorMessage = 'Error creating new book.'
+                params.errorMessage = '!! Error creating new book !!'
             }
         }
         res.render(`books/${form}.ejs`, params);

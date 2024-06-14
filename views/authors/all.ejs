@@ -1,4 +1,4 @@
-<h2 class="page-header">Search Authors</h2>
+<h2 class="page-header page-header-pink">Search Authors</h2>
 <form action="/authors" method="GET">
     <div class="form-row aqua">
         <div class="form-item">
@@ -12,11 +12,17 @@
 </form>
 <br>
 <br>
-<% authors.forEach(author => { %>
-    <div><%= author.name %></div>
-    <div class="btn-row">
-        <a class="btn btn-primary" href="/authors/<%= author.id %>">View</a>
-        <a class="btn btn-secondary" href="/authors/<%= author.id %>/edit">Edit</a>
-        <%- include('../partials/deleteForm.ejs', {url: `/authors/${author.id}`}) %>     <!-- url is sent as a javascript variable, not as ejs -->
-    </div>
-<% }) %>
+<ul class="authors-list">
+    <% authors.forEach(author => { %>
+        <li>
+            <div class="author-row">
+                <div class="author-name"><%= author.name %></div>
+                <div class="btn-row">
+                    <a class="btn btn-primary" href="/authors/<%= author.id %>">View</a>
+                    <a class="btn btn-secondary" href="/authors/<%= author.id %>/edit">Edit</a>
+                    <%- include('../partials/deleteForm.ejs', {url: `/authors/${author.id}`}) %>     <!-- url is sent as a javascript variable, not as ejs -->
+                </div>
+            </div>
+        </li>
+    <% }) %>
+</ul>

@@ -14,7 +14,7 @@ authorSchema.pre('deleteOne', {document: true, query: false}, async function(nex
     try {
         const books = await Book.find({ author: this.id });
         if (books.length > 0) {
-            next(new Error('This author still has books.'))
+            next(new Error('!! This author still has books !!'))
         }
         else {
             next()

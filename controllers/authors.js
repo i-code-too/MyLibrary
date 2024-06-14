@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     //         res.render('authors/new', 
     //             {
     //                 // author: author,
-    //                 errorMessage: 'Error creating Author'
+    //                 errorMessage: '!! Error creating Author !!'
     //             }
     //         )
     //     }
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
     } catch {
         res.render('authors/new', {
                 author: author,
-                errorMessage: 'Error creating new author.'
+                errorMessage: '!! Error creating new author !!'
             }
         )
     }
@@ -93,7 +93,7 @@ router.put('/:id', async (req, res) => {         // put method cannot be used di
         else {
             res.render('authors/edit', {
                     author: author,
-                    errorMessage: 'Error updating author.'
+                    errorMessage: '!! Error updating author !!'
                 }
             )
         }
@@ -117,7 +117,7 @@ router.delete('/:id', async (req, res) => {         // delete method cannot be u
             res.render('authors/show', {
                 author: author,
                 booksByAuthor: books,
-                errorMessage: 'Error deleting author since the author still has books stored under their name.'
+                errorMessage:  '!! Error deleting author since the author still has books stored under their name !!'
             });
         }
     }

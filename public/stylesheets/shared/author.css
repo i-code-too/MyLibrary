@@ -1,0 +1,28 @@
+.author-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0 0  1rem;
+    border-bottom: 3px solid var(--color-background-light);
+    align-items: center;
+}
+
+.author-name {
+    font-size: 1.5rem;
+}
+
+.authors-list {
+    list-style: none;
+}
+
+.authors-list li:nth-child(3n+1) {
+    color: var(--color-background-left);
+}
+
+.authors-list li:nth-child(3n+2) {
+    color: var(--color-background-middle);
+}
+
+.authors-list li:nth-child(3n) {
+    color: var(--color-background-right);
+}
