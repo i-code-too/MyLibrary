@@ -14,6 +14,12 @@
     height: calc(var(--book-cover-width-large) / var(--book-cover-aspect-ratio));
 }
 
+.book-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .book-grid {
     display: grid;
     justify-content: center;
@@ -41,6 +47,7 @@
     align-items: center;
     gap: 1rem;
     grid-template-columns: auto auto;
+    margin-left: 50px;
 }
 
 .book-details-btn-grid {
