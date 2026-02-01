@@ -33,7 +33,7 @@
 }
 
 .btn-primary {
-    color: var(--color-btn-primary-text);
+    /* color: var(--color-btn-primary-text); */
     background-color: var(--color-btn-primary-background);
     --color-btn-border: hsl(213, 51%, 65%);
 }
